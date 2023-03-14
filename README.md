@@ -116,18 +116,18 @@ print(a, '**', b, '=', result4)
 ```
 a = int(input("첫번째 숫자를 입력하세요: "))
 b = int(input("두번째 숫자를 입력하세요: "))
-result = a + b
+result = a + b # 덧셈
 print(a, '+', b, '=', result)
-result = a - b
+result = a - b # 뺄셈
 print(a, '-', b, '=', result)
-result = a * b
+result = a * b # 곱셈
 print(a, '*', b, '=', result)
-result = a/b
+result = a/b # 나눗셈
 print(a, '/', b, '=', result)
-result = a**b
+result = a**b # 제곱
 print(a, '**', b, '=', result)
-result = a//b
+result = a//b # 몫
 print(a, '//', b, '=', result)
-result = a%b
+result = a%b # 나머지
 print(a, '%', b, '=', result)
 ```
