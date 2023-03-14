@@ -1,7 +1,6 @@
 # python
 
-
-## 자료형
+## 1주차 네트워크실무 수업
 #### 숫자형
 * 정수 : 123, -20, 0  
 * 실수 : 123.45, -4321.5, 6.08e9  
@@ -111,4 +110,24 @@ print(a, '*', b, '=', result)
 print(a, '-', b, '=', result2)
 print(a, '/', b, '=', result3)
 print(a, '**', b, '=', result4)
+```
+
+#### input() 함수 이용한 계산기
+```
+a = int(input("첫번째 숫자를 입력하세요: "))
+b = int(input("두번째 숫자를 입력하세요: "))
+result = a + b
+print(a, '+', b, '=', result)
+result = a - b
+print(a, '-', b, '=', result)
+result = a * b
+print(a, '*', b, '=', result)
+result = a/b
+print(a, '/', b, '=', result)
+result = a**b
+print(a, '**', b, '=', result)
+result = a//b
+print(a, '//', b, '=', result)
+result = a%b
+print(a, '%', b, '=', result)
 ```
