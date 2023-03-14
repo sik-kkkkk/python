@@ -40,7 +40,24 @@ print(c,d,e,f,g)
 1. 큰 따옴표 : "Hello World"  
 2. 작은 따옴표 : 대한민국'  
 3. 큰 따옴표 3 : """Hello!"""
-4. 작은 따옴표 3 : '''Life is too short, You need python'''
+4. 작은 따옴표 3 : '''Life is too short, You need python
+```
+myName = "Hyeong Kim" # 낙타 표기법(카멜 표기법)
+my_name = "김형식" # 뱀 표기법 (스네이크 표기법)
+MyName = "kiki" # 파스칼 표기법
+_my_name = "korea"
+MYNAME = "God is love"
+my2name = "12345"
+# 2myname = '9876' 숫자가 앞으로 오는 것은 실행 안됨
+# my-name = "michle" 언더바가 있어야 가능하다. -는 안된다. 
+# my name = "kiki" 중간에 스페이스바가 있으면 안되다. 
+myStr = '123' # str
+myNum = 123 # int
+
+print(myStr, + myNum)
+print(type(myStr))
+print(type(myNum))
+```
 
 #### 여러개 변수 할당
 ```
