@@ -50,3 +50,140 @@ L.remove(3)  #리스트에 해당되는 요소 값을 삭제한다.
 print(L)
 ```
 
+```
+k = ['a','b','c','d']
+k.remove('b')
+print(k)
+```
+
+```
+k = "God is love!"
+print(k[:3])
+print(k[6:])
+print(k[-8:-1])
+```
+
+```
+k = " God is love! "
+print(k.upper())
+print(k.lower())
+print(k.strip())
+```
+
+```
+a = " God, is, love! "
+print(a.split(","))
+```
+
+```
+a = ["apple", "banana", "cherry"]
+a.append("orrange") #맨뒤에 추가가
+print(a)
+```
+
+```
+a = ["apple", "banana", "cherry"]
+a.insert(1,"orrange") #지정된 곳에 삽입입
+print(a)
+```
+
+```
+a = ["apple", "banana", "cherry"]
+a.remove("banana")
+print(a)
+```
+
+```
+a = ["apple", "banana", "cherry"]
+a.pop()  # 지정을 하지 않으연 맨뒤 값 삭제
+print(a)
+a.pop(1) #지정한 위치치 삭제
+print(a)
+```
+
+```
+a = ["apple", "banana", "cherry"]
+del a[0]
+print(a)
+a.clear()
+print(a)
+```
+
+```
+fruit = ["apple", "banana", "cherry"]
+for x in fruit:
+  print(x) 
+```
+
+```
+fruit = ["apple", "banana", "cherry"]
+for i in range(len(fruit)):
+  print(fruit)
+```
+
+### sort
+
+```
+a = [5,3,6,8,1,9,0]
+a.sort()
+print(a)
+```
+
+```
+a = [5,3,6,8,1,9,0,2,4,7]
+a.sort(reverse = True)
+print(a)
+a.sort()
+print(a)
+```
+
+```
+fruit = ["apple", "Kiwi", "banana", "cherry", "Orange"]
+fruit.sort()  # 대소문자 구분하여 정렬렬
+print(fruit)
+fruit.sort(key = str.lower)  # 대소문자 구분 없이 정렬렬
+print(fruit)
+fruit.reverse() # 항목의 순서를 반대로 바꿈
+print(fruit)
+```
+
+```
+# list 복사
+fruit = ["apple", "Kiwi", "banana", "cherry", "Orange"]
+myList = fruit.copy()
+print(myList)
+cpList = list(fruit)
+print(cpList)
+```
+
+## Tuple 자료형
+
+```
+l = [1,2,3]
+t = (4,5,6) # 튜플은 괄호가 다르다.
+l[0] = 5
+print(l)
+#t[0] = 1  # 튜플의 값은 변경 할수 없다. 
+print(t)
+```
+
+```
+t = ("apple",)
+print(t)
+print(type(t))
+f = ("banana") # 튜플로 인식하기 위해서는 "," 필요
+print(f)
+print(type(f)) # ","가 없어서 str로 인식식
+```
+
+```
+f = ("apple", "Kiwi", "banana", "cherry", "Orange")
+print(f[:4])
+print(f[2:])
+```
+
+```
+f = ("apple", "Kiwi", "banana", "cherry", "Orange")
+if "apple" in f:
+  print("Yes, 'apple' is in")
+```
