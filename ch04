@@ -164,3 +164,87 @@ for x in range(6):
 else:
   print("끝")
 ```
+
+```
+#for문 루프는 비워 둘수 없음
+for x in [0,1,2]:
+  pass
+```
+
+```
+#두수를 더하는 함수
+def plus(v1,v2):
+  result = 0
+  result = v1+v2
+  return result
+
+hap = 0
+hap = plus(10,20)
+print("10+20 plus() 처리 결과는 %d " %hap)
+hap = plus(20,30)
+print("20+30 plus() 처리 결과는 %d " %hap)
+```
+
+```
+#계산기 코드
+def calc(v1,v2,op):
+  result = 0
+  if op == '+':
+    result = v1 + v2
+  elif op == '-':
+    result = v1 - v2
+  elif op == '*':
+    result = v1 * v2
+  elif op == '/':
+    result = v1 / v2
+  return result
+
+rst = 0 
+var1, var2, opr = 0,0,""
+
+opr = input("(+,-,*,/) 입력: ")
+var1 = int(input("1번째 수 입력: "))
+var2 = int(input("2번째 수 입력: "))
+rst = calc(var1, var2, opr)
+print("계산기%d %s %d = %d" %(var1, opr, var2, rst))
+```
+
+# Q. 0으로 나누려고 하면 메시지 출력 계산 되지 않게, **제곱 연산자 추가 (숫자1, 연산자, 숫자 2)
+
+```
+def calc(v1, v2, op):
+    while True:
+        if op == '+':
+            result = v1 + v2
+        elif op == '-':
+            result = v1 - v2
+        elif op == '*':
+            result = v1 * v2
+        elif op == '/':
+            if v2 == 0:
+                print("0으로 나눌 수 없습니다.")
+                v1 = int(input("1번째 수 입력: "))
+                op = input("(+,-,*,/,**) 입력: ")
+                v2 = int(input("2번째 수 입력: "))
+                continue
+            result = v1 / v2
+        elif op == '**':
+            result = v1 ** v2
+        return result
+
+var1 = int(input("1번째 수 입력: "))
+opr = input("(+,-,*,/,**) 입력: ")
+var2 = int(input("2번째 수 입력: "))
+rst = calc(var1, var2, opr)
+
+while True:
+    if input("다시 계산하시겠습니까? (Y/N): ").lower() == "y":
+        var1 = int(input("1번째 수 입력: "))
+        opr = input("(+,-,*,/,**) 입력: ")
+        var2 = int(input("2번째 수 입력: "))
+        rst = calc(var1, var2, opr)
+        print("계산기%d %s %d = %d" % (var1, opr, var2, rst))
+    else:
+        break
+```
+
