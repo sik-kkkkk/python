@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="kor">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Dashboard - SB Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+    <link href="/static/css/styles.css" rel="stylesheet" />
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+</head>
+
+<body class="sb-nav-fixed sb-sidenav-toggled">
+    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+        <!-- Navbar Brand-->
+        <a class="navbar-brand ps-3" href="/">주택청약</a>
+    </nav>
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_content">
+            <main>
+                <div class="container-fluid px-4">
+                    <h1 class="mt-4 mb-4">주택청약 경쟁률</h1>
+                    <div class="row">
+                        <div class="col-xl-6">
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <i class="fas fa-chart-area me-1"></i>
+                                    일반공급 경쟁률
+                                </div>
+                                <div class="card-body"><canvas id="myAreaChart1" width="100%" height="40"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-6">
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <i class="fas fa-chart-area me-1"></i>
+                                    특별공급 경쟁률
+                                </div>
+                                <div class="card-body"><canvas id="myAreaChart2" width="100%" height="40"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <i class="fas fa-table me-1"></i>
+                            전체 데이터
+                        </div>
+                        <div class="card-body">
+                            <table id="datatablesSimple">
+                                <thead>
+                                    <tr>
+                                        <th>시도</th>
+                                        <th>연월</th>
+                                        <th>일반공급 경쟁률</th>
+                                        <th>일반공급 공급세대수</th>
+                                        <th>일반공급 접수건수</th>
+                                        <th>특별공급 경쟁률</th>
+                                        <th>특별공급 공급세대수</th>
+                                        <th>특별공급 접수건수</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for item in data.all_data %}
+                                    <tr>
+                                        <td>{{item['시도']}}</td>
+                                        <td>{{item['연월']}}</td>
+                                        <td>{{item['일반공급 경쟁률']}}</td>
+                                        <td>{{item['일반공급 공급세대수']}}</td>
+                                        <td>{{item['일반공급 접수건수']}}</td>
+                                        <td>{{item['특별공급 경쟁률']}}</td>
+                                        <td>{{item['특별공급 공급세대수']}}</td>
+                                        <td>{{item['특별공급 접수건수']}}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </main>
+            <footer class="py-4 bg-light mt-auto">
+                <div class="container-fluid px-4">
+                    <div class="d-flex align-items-center justify-content-between small">
+                        <div class="text-muted">Copyright &copy; Your Website 2023</div>
+                        <div>
+                            <a href="#">Privacy Policy</a>
+                            &middot;
+                            <a href="#">Terms &amp; Conditions</a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
+        crossorigin="anonymous"></script>
+    <script src="/static/js/datatables-simple-demo.js"></script>
+
+    <script>
+        var json = "{{data|safe}}";
+        json = JSON.stringify(json);
+        json = JSON.parse(json);
+
+        var ctx1 = document.getElementById("myAreaChart1");
+        var ctx2 = document.getElementById("myAreaChart2");
+        const labels = [
+        {% for item in data.date_list %} '{{item}}', {% endfor %}
+        ];
+
+        var myLineChart1 = new Chart(ctx1, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [
+                {% for item in data.data_list %}
+                {
+                        label: "{{item['name']}}",
+                        data: {{item['value1']}},
+                        fill: false,
+                        borderColor: "rgb({{item['r']}}, {{item['g']}}, {{item['b']}})",
+                        tension: 0.1
+                    },
+                {% endfor %}
+                ]
+            },
+            options: {
+                scales: {
+                    xAxes: [{
+                        time: {
+                            unit: 'date'
+                        },
+                        gridLines: {
+                            display: false
+                        },
+                        ticks: {
+                            maxTicksLimit: 12
+                        }
+                    }],
+                    yAxes: [{
+                        ticks: {
+                            min: 0,
+                            max: 40000,
+                            maxTicksLimit: 5
+                        },
+                        gridLines: {
+                            color: "rgba(0, 0, 0, .125)",
+                        }
+                    }],
+                },
+                legend: {
+                    display: false
+                }
+            }
+        });
+
+        var myLineChart2 = new Chart(ctx2, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [
+                {% for item in data.data_list %}
+                {
+                        label: "{{item['name']}}",
+                        data: {{item['value2']}},
+                        fill: false,
+                        borderColor: "rgb({{item['r']}}, {{item['g']}}, {{item['b']}})",
+                        tension: 0.1
+                    },
+                {% endfor %}
+                ]
+            },
+            options: {
+                scales: {
+                    xAxes: [{
+                        time: {
+                            unit: 'date'
+                        },
+                        gridLines: {
+                            display: false
+                        },
+                        ticks: {
+                            maxTicksLimit: 12
+                        }
+                    }],
+                    yAxes: [{
+                        ticks: {
+                            min: 0,
+                            max: 40000,
+                            maxTicksLimit: 5
+                        },
+                        gridLines: {
+                            color: "rgba(0, 0, 0, .125)",
+                        }
+                    }],
+                },
+                legend: {
+                    display: false
+                }
+            }
+        });
+
+    </script>
+</body>
+
+</html>
